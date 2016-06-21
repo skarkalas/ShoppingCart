@@ -15,5 +15,11 @@ class ShopTest extends TestCase
 	{
 		assertNotNull(shop)
 	}
+	
+	def testCheckout()
+	{
+		val goods = List[String]("test")
+		assertEquals("empty", 0, shop.checkout(goods))
+	}
 }
 
