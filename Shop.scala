@@ -14,45 +14,29 @@ object Orange
 
 class Shop
 {
-	def checkout(goods: List[Merchandise]): Int = 
+	def fullPrice(apples: Int, oranges: Int) = apples * Apple.price + oranges * Orange.price
+	def priceAfterDiscount(apples: Int, oranges: Int) = 
 	{
-		def matchApples(good: Merchandise) = good match
-		{
-			case apple: Apple => true
-			case _ => false
-		}
-
-		def matchOranges(good: Merchandise) = good match
-		{
-			case orange: Orange => true
-			case _ => false
-		}
-		
-		val apples = goods.filter(matchApples).length
-		var oranges = goods.filter(matchOranges).length
-		
-		apples * Apple.price + oranges * Orange.price
-	}
-
-	def checkout2(goods: List[Merchandise]): Int = 
-	{
-		def matchApples(good: Merchandise) = good match
-		{
-			case apple: Apple => true
-			case _ => false
-		}
-
-		def matchOranges(good: Merchandise) = good match
-		{
-			case orange: Orange => true
-			case _ => false
-		}
-		
-		val apples = goods.filter(matchApples).length
-		var oranges = goods.filter(matchOranges).length
-		
 		val appleCost = (apples / 2) * Apple.price + (apples % 2) * Apple.price
 		val orangeCost = (oranges / 3) * (2 * Orange.price) + (oranges % 3) * Orange.price
-		appleCost + orangeCost
+		appleCost + orangeCost		
 	}
+	def checkout(goods: List[Merchandise], setPrices:(Int, Int) => Int): Int = 
+	{
+		def matchApples(good: Merchandise) = good match
+		{
+			case apple: Apple => true
+			case _ => false
+		}
+		def matchOranges(good: Merchandise) = good match
+		{
+			case orange: Orange => true
+			case _ => false
+		}	
+		val apples = goods.filter(matchApples).length
+		var oranges = goods.filter(matchOranges).length
+		setPrices(apples, oranges)
+	}
+	def checkoutInFull(goods: List[Merchandise]) = checkout(goods, fullPrice)
+	def checkoutWithDiscount(goods: List[Merchandise]) = checkout(goods, priceAfterDiscount)	
 }
