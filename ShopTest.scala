@@ -18,7 +18,7 @@ class ShopTest extends TestCase
 	
 	def testCheckout()
 	{
-		val goods = List[Merchandise](new Apple, new Apple, new Apple, new Orange, new Orange)
+		val goods = List[Merchandise](Apple(), Apple(), Apple(), Orange(), Orange())
 		assertEquals("3 x 60 + 2 x 25 must be 230", 230, shop.checkout(goods))
 	}
 }
